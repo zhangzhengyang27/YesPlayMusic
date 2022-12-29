@@ -1,5 +1,6 @@
 <template>
   <div class="fm" :style="{ background }" data-theme="dark">
+    <!-- 下一张图片 -->
     <img :src="nextTrackCover" style="display: none" loading="lazy" />
     <img
       class="cover"
@@ -10,13 +11,17 @@
     <div class="right-part">
       <div class="info">
         <div class="title">{{ track.name }}</div>
-        <div class="artist"><ArtistsInLine :artists="artists" /></div>
+        <div class="artist">
+          <ArtistsInLine :artists="artists" />
+        </div>
       </div>
       <div class="controls">
         <div class="buttons">
+          <!-- 不喜欢的按钮 -->
           <button-icon title="不喜欢" @click.native="moveToFMTrash">
             <svg-icon id="thumbs-down" icon-class="thumbs-down" />
           </button-icon>
+          <!-- 播放或暂停 -->
           <button-icon
             :title="$t(isPlaying ? 'player.pause' : 'player.play')"
             class="play"
@@ -24,11 +29,15 @@
           >
             <svg-icon :icon-class="isPlaying ? 'pause' : 'play'" />
           </button-icon>
+          <!-- 播放下一个的按钮 -->
           <button-icon :title="$t('player.next')" @click.native="next">
             <svg-icon icon-class="next" />
           </button-icon>
         </div>
-        <div class="card-name"><svg-icon icon-class="fm" />私人FM</div>
+        <div class="card-name">
+          <svg-icon icon-class="fm" />
+          私人FM
+        </div>
       </div>
     </div>
   </div>
@@ -124,6 +133,7 @@ export default {
   height: 198px;
   box-sizing: border-box;
 }
+
 .cover {
   height: 100%;
   clip-path: border-box;
@@ -132,12 +142,14 @@ export default {
   cursor: pointer;
   user-select: none;
 }
+
 .right-part {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: var(--color-text);
   width: 100%;
+
   .title {
     font-size: 1.6rem;
     font-weight: 600;
@@ -148,6 +160,7 @@ export default {
     overflow: hidden;
     word-break: break-all;
   }
+
   .artist {
     opacity: 0.68;
     display: -webkit-box;
@@ -156,25 +169,31 @@ export default {
     overflow: hidden;
     word-break: break-all;
   }
+
   .controls {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-left: -0.4rem;
+
     .buttons {
       display: flex;
     }
+
     .button-icon {
       margin: 0 8px 0 0;
     }
+
     .svg-icon {
       width: 24px;
       height: 24px;
     }
+
     .svg-icon#thumbs-down {
       width: 22px;
       height: 22px;
     }
+
     .card-name {
       font-size: 1rem;
       opacity: 0.18;
@@ -182,6 +201,7 @@ export default {
       align-items: center;
       font-weight: 600;
       user-select: none;
+
       .svg-icon {
         width: 18px;
         height: 18px;

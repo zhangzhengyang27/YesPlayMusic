@@ -82,6 +82,7 @@ export default {
     this.fetchData();
   },
   methods: {
+    // 监听键盘
     handleKeydown(e) {
       if (e.code === 'Space') {
         if (e.target.tagName === 'INPUT') return false;
@@ -102,6 +103,7 @@ export default {
         this.$store.dispatch('fetchCloudDisk');
       }
     },
+    // 处理滚动事件
     handleScroll() {
       this.$refs.scrollbar.handleScroll();
     },
@@ -141,6 +143,7 @@ main::-webkit-scrollbar {
 .slide-up-leave-active {
   transition: transform 0.4s;
 }
+
 .slide-up-enter,
 .slide-up-leave-to {
   transform: translateY(100%);

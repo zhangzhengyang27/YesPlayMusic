@@ -1,10 +1,11 @@
 <template>
   <div v-show="show" class="home">
+    <!-- by Apple Music 模块-->
     <div
       v-if="settings.showPlaylistsByAppleMusic !== false"
       class="index-row first-row"
     >
-      <div class="title"> by Apple Music </div>
+      <div class="title"> by Apple Music</div>
       <CoverRow
         :type="'playlist'"
         :items="byAppleMusic"
@@ -12,12 +13,13 @@
         :image-size="1024"
       />
     </div>
+    <!-- 推荐歌单 模块 -->
     <div class="index-row">
       <div class="title">
         {{ $t('home.recommendPlaylist') }}
-        <router-link to="/explore?category=推荐歌单">{{
-          $t('home.seeMore')
-        }}</router-link>
+        <router-link to="/explore?category=推荐歌单"
+          >{{ $t('home.seeMore') }}
+        </router-link>
       </div>
       <CoverRow
         :type="'playlist'"
@@ -25,13 +27,16 @@
         sub-text="copywriter"
       />
     </div>
+    <!-- for you 模块 -->
     <div class="index-row">
-      <div class="title"> For You </div>
+      <div class="title"> For You</div>
       <div class="for-you-row">
+        <!-- 每日推荐模块 -->
         <DailyTracksCard ref="DailyTracksCard" />
         <FMCard />
       </div>
     </div>
+    <!-- 推荐艺人 模块 -->
     <div class="index-row">
       <div class="title">{{ $t('home.recommendArtist') }}</div>
       <CoverRow
@@ -40,6 +45,7 @@
         :items="recommendArtists.items"
       />
     </div>
+    <!-- 新专速递 模块 -->
     <div class="index-row">
       <div class="title">
         {{ $t('home.newAlbum') }}
@@ -51,12 +57,13 @@
         sub-text="artist"
       />
     </div>
+    <!-- 排行榜 模块 -->
     <div class="index-row">
       <div class="title">
         {{ $t('home.charts') }}
-        <router-link to="/explore?category=排行榜">{{
-          $t('home.seeMore')
-        }}</router-link>
+        <router-link to="/explore?category=排行榜"
+          >{{ $t('home.seeMore') }}
+        </router-link>
       </div>
       <CoverRow
         type="playlist"
@@ -110,14 +117,17 @@ export default {
   },
   methods: {
     loadData() {
+      // 设置进度调，将原先的 1000 调整带 10
       setTimeout(() => {
         if (!this.show) NProgress.start();
-      }, 1000);
+      }, 10);
+
       getRecommendPlayList(10, false).then(items => {
         this.recommendPlaylist.items = items;
         NProgress.done();
         this.show = true;
       });
+
       newAlbums({
         area: this.settings.musicLanguage ?? 'ALL',
         limit: 10,
@@ -136,6 +146,7 @@ export default {
         toplistOfArtistsAreaTable[this.settings.musicLanguage ?? 'all']
       ).then(data => {
         let indexs = [];
+        // 随机插入 6 首歌
         while (indexs.length < 6) {
           let tmp = ~~(Math.random() * 100);
           if (!indexs.includes(tmp)) indexs.push(tmp);
@@ -160,9 +171,11 @@ export default {
 .index-row {
   margin-top: 54px;
 }
+
 .index-row.first-row {
   margin-top: 32px;
 }
+
 .playlists {
   display: flex;
   flex-wrap: wrap;
@@ -170,6 +183,7 @@ export default {
     right: -12px;
     left: -12px;
   }
+
   .index-playlist {
     margin: 12px 12px 24px 12px;
   }
@@ -183,6 +197,7 @@ export default {
   font-size: 28px;
   font-weight: 700;
   color: var(--color-text);
+
   a {
     font-size: 13px;
     font-weight: 600;

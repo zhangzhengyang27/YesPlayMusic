@@ -14,19 +14,17 @@
       />
       <div class="text">
         <div v-if="showPlayCount" class="info">
-          <span class="play-count"
-            ><svg-icon icon-class="play" />{{
-              item.playCount | formatPlayCount
-            }}
+          <span class="play-count">
+            <svg-icon icon-class="play" />{{ item.playCount | formatPlayCount }}
           </span>
         </div>
         <div class="title" :style="{ fontSize: subTextFontSize }">
-          <span v-if="isExplicit(item)" class="explicit-symbol"
-            ><ExplicitSymbol
-          /></span>
+          <span v-if="isExplicit(item)" class="explicit-symbol">
+            <ExplicitSymbol />
+          </span>
           <span v-if="isPrivacy(item)" class="lock-icon">
-            <svg-icon icon-class="lock"
-          /></span>
+            <svg-icon icon-class="lock" />
+          </span>
           <router-link :to="getTitleLink(item)">{{ item.name }}</router-link>
         </div>
         <div v-if="type !== 'artist' && subText !== 'none'" class="info">
@@ -92,6 +90,7 @@ export default {
       }
       if (this.subText === 'appleMusic') return 'by Apple Music';
     },
+    // 判断是否是隐私歌单
     isPrivacy(item) {
       return this.type === 'playlist' && item.privacy === 10;
     },
@@ -101,6 +100,7 @@ export default {
     getTitleLink(item) {
       return `/${this.type}/${item.id}`;
     },
+    // 获取图片的 url
     getImageUrl(item) {
       if (item.img1v1Url) {
         let img1v1ID = item.img1v1Url.split('/');

@@ -13,7 +13,8 @@
           class="play-button"
           :style="playButtonStyles"
           @click.stop="play()"
-          ><svg-icon icon-class="play" />
+        >
+          <svg-icon icon-class="play" />
         </button>
       </div>
       <img :src="imageUrl" :style="imageStyles" loading="lazy" />
@@ -55,6 +56,7 @@ export default {
         styles.width = this.fixedSize + 'px';
         styles.height = this.fixedSize + 'px';
       }
+      // 推荐艺人
       if (this.type === 'artist') styles.borderRadius = '50%';
       return styles;
     },

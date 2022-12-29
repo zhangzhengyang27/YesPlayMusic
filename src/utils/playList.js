@@ -27,6 +27,7 @@ export function getListSourcePath() {
   }
 }
 
+// 获取推荐播放列表
 export async function getRecommendPlayList(limit, removePrivateRecommand) {
   if (isAccountLoggedIn()) {
     const playlists = await Promise.all([
